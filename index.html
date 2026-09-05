@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formateador JSON Online Gratis | Validar, Formatear y Minificar JSON</title>
+<meta name="description" content="Formateador, Validador y Minificador de JSON en tiempo real 100% gratis y online. Valida, formatea con indentación de 2 o 4 espacios, minifica y copia tu JSON al instante. Sin registro, seguro y privado.">
+<meta name="keywords" content="JSON Formatter Online, Validar JSON Gratis, JSON Minifier, formatear JSON, validador JSON, embellecer JSON, minificar JSON">
+<meta name="author" content="JSON Formatter Tool">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0f172a">
+<link rel="canonical" href="https://ejemplo.com/json-formatter">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="JSON Formatter Online Gratis - Valida, Formatea y Minifica JSON">
+<meta property="og:description" content="La herramienta más rápida para validar, formatear y minificar JSON en tiempo real. 100% en tu navegador, privada y gratuita.">
+<meta property="og:url" content="https://ejemplo.com/json-formatter">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="JSON Formatter Online">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JSON Formatter Online Gratis">
+<meta name="twitter:description" content="Valida, formatea y minifica JSON en tiempo real. Gratis, rápido y seguro.">
+<style>
+:root{
+  --bg:#0b1220;
+  --bg-soft:#0f172a;
+  --card:#111d33;
+  --card-2:#162544;
+  --border:#1e335a;
+  --border-soft:#23365f;
+  --text:#e6eefc;
+  --muted:#94a3b8;
+  --accent:#38bdf8;
+  --accent-2:#818cf8;
+  --success:#22c55e;
+  --error:#ef4444;
+  --warning:#f59e0b;
+  --radius:14px;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:ui-sans-system,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+  background:radial-gradient(1200px 600px at 50% -10%, #1e3a5f 0%, transparent 60%), var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* Header */
+header{
+  position:sticky;top:0;z-index:20;
+  backdrop-filter:blur(12px);
+  background:rgba(11,18,32,.8);
+  border-bottom:1px solid var(--border);
+}
+.nav{
+  max-width:1200px;margin:0 auto;padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px
+}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
+.logo-mark{
+  width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  display:grid;place-items:center;color:#0b1220;font-weight:900;font-size:18px
+}
+.logo span{font-size:1.05rem}
+.nav-links{display:flex;gap:18px;list-style:none;font-size:.9rem}
+.nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--text)}
+.badge{
+  font-size:.72rem;background:rgba(56,189,248,.12);color:var(--accent);
+  border:1px solid rgba(56,189,248,.25);padding:4px 8px;border-radius:999px
+}
+/* ADS */
+.ad-slot{
+  max-width:1200px;margin:18px auto 0;padding:0 20px;width:100%;
+}
+.ad-box{
+  border:1px dashed #2a466e;background:rgba(22,37,68,.6);
+  border-radius:12px;min-height:90px;display:grid;place-items:center;
+  color:#5a718f;font-size:.85rem;letter-spacing:.4px
+}
+/* Main */
+main{flex:1;max-width:1200px;width:100%;margin:0 auto;padding:22px 20px 40px}
+.hero{text-align:center;padding:18px 0 14px}
+.hero h1{
+  font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.15;font-weight:800;
+  letter-spacing:-.02em
+}
+.hero h1 span{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);max-width:680px;margin:10px auto 0;font-size:.98rem}
+/* Editor Card */
+.editor-card{
+  margin-top:18px;background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden
+}
+.toolbar{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+  padding:14px;background:var(--card-2);border-bottom:1px solid var(--border);
+}
+.toolbar-group{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.divider{width:1px;height:32px;background:var(--border);margin:0 2px}
+.btn{
+  appearance:none;border:1px solid var(--border-soft);background:#0f213e;color:var(--text);
+  padding:9px 14px;border-radius:10px;font-size:.88rem;font-weight:600;
+  cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.15s
+}
+.btn:hover{transform:translateY(-1px);border-color:#2d4a7a;background:#143054}
+.btn:active{transform:none}
+.btn-primary{background:linear-gradient(135deg,#38bdf8,#6366f1);border-color:transparent;color:#071220}
+.btn-primary:hover{filter:brightness(1.05)}
+.btn-ghost{background:transparent}
+.btn-success{border-color:rgba(34,197,94,.3);color:#b7f7cc}
+.btn-success:hover{background:rgba(34,197,94,.12)}
+.btn-danger{color:#fecaca;border-color:rgba(239,68,68,.3)}
+.btn-danger:hover{background:rgba(239,68,68,.1)}
+.select{
+  background:#0f213e;border:1px solid var(--border-soft);color:var(--text);
+  padding:9px 12px;border-radius:10px;font-size:.88rem;font-weight:600
+}
+.editor-grid{display:grid;grid-template-columns:1fr}
+.editor-wrap{position:relative;display:flex;flex-direction:column}
+.editor-label{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 14px;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  background:#0e1c34;border-bottom:1px solid var(--border)
+}
+.editor-label small{text-transform:none;letter-spacing:0;font-weight:500}
+textarea#jsonInput{
+  width:100%;min-height:380px;resize:vertical;
+  background:#0a152b;color:#dbe7ff;
+  border:0;padding:16px 16px 16px 18px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  font-size:14px;line-height:1.6;tab-size:2;
+}
+textarea#jsonInput::placeholder{color:#5a718f}
+.status-bar{
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+  padding:10px 14px;background:#0e1c34;border-top:1px solid var(--border);font-size:.82rem
+}
+.counters{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted)}
+.counters strong{color:var(--text);font-weight:700}
+.validation{
+  display:flex;align-items:center;gap:8px;font-weight:600;padding:6px 10px;border-radius:999px;border:1px solid transparent
+}
+.validation.valid{background:rgba(34,197,94,.1);color:#86efac;border-color:rgba(34,197,94,.25)}
+.validation.invalid{background:rgba(239,68,68,.1);color:#fca5a5;border-color:rgba(239,68,68,.25)}
+.validation.neutral{background:rgba(148,163,184,.1);color:var(--muted);border-color:var(--border)}
+.dot{width:8px;height:8px;border-radius:50%;background:currentColor}
+.error-box{
+  margin:12px 14px 14px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);
+  color:#fecaca;border-radius:10px;padding:12px 14px;font-family:ui-monospace,monospace;font-size:.86rem;display:none;white-space:pre-wrap;word-break:break-word
+}
+.error-box.show{display:block}
+.toast{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:#0f213e;border:1px solid var(--border);color:var(--text);
+  padding:12px 16px;border-radius:12px;box-shadow:var(--shadow);
+  font-size:.9rem;font-weight:600;opacity:0;transition:.3s;z-index:50;pointer-events:none
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* SEO Content */
+.content{
+  margin-top:28px;display:grid;gap:18px
+}
+.card{
+  background:rgba(17,29,51,.7);border:1px solid var(--border);border-radius:var(--radius);padding:22px
+}
+.card h2{font-size:1.35rem;margin-bottom:10px;letter-spacing:-.01em}
+.card h3{font-size:1.05rem;margin:18px 0 8px;color:#cfe0ff}
+.card p,.card li{color:#cbd5e1;font-size:.95rem}
+.card ul{padding-left:18px;display:grid;gap:6px}
+.faq{display:grid;gap:10px;margin-top:10px}
+.faq details{
+  background:#0f213e;border:1px solid var(--border);border-radius:12px;padding:14px 16px
+}
+.faq summary{cursor:pointer;font-weight:700;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.3rem;color:var(--accent);transition:.2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{margin-top:10px;color:var(--muted)}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:12px}
+.feature{background:#0f213e;border:1px solid var(--border);border-radius:12px;padding:16px}
+.feature h4{font-size:.95rem;margin-bottom:6px}
+.feature p{font-size:.88rem;color:var(--muted)}
+/* Footer */
+footer{
+  border-top:1px solid var(--border);background:#0a152b;margin-top:10px
+}
+.footer-inner{max-width:1200px;margin:0 auto;padding:22px 20px;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap;list-style:none;font-size:.9rem}
+.footer-links a{color:var(--muted)}
+.copy{color:#64748b;font-size:.85rem}
+@media (max-width:760px){
+  .nav-links{display:none}
+  textarea#jsonInput{min-height:300px}
+  .toolbar{justify-content:center}
+  .status-bar{flex-direction:column;align-items:flex-start}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Formateador, Validador y Minificador de JSON",
+  "description": "Herramienta online gratuita para validar, formatear y minificar JSON en tiempo real. 100% client-side, privada y rápida.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type":"Offer","price":"0","priceCurrency":"USD"},
+  "inLanguage":"es"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"¿Qué es JSON y para qué sirve?","acceptedAnswer":{"@type":"Answer","text":"JSON (JavaScript Object Notation) es un formato ligero de intercambio de datos, fácil de leer y escribir para humanos y máquinas. Se usa principalmente para transmitir datos entre un servidor y una aplicación web o móvil mediante APIs."}},
+    {"@type":"Question","name":"¿Por qué debo formatear o validar mi JSON?","acceptedAnswer":{"@type":"Answer","text":"Formatear JSON con indentación mejora la legibilidad y facilita la depuración. Validarlo te asegura que no tenga errores de sintaxis como comas faltantes, comillas incorrectas o llaves sin cerrar antes de usarlo en tu código."}},
+    {"@type":"Question","name":"¿Qué hace la opción Minificar?","acceptedAnswer":{"@type":"Answer","text":"Minificar elimina todos los espacios innecesarios y saltos de línea, reduciendo el tamaño del archivo. Es ideal para optimizar el rendimiento al enviar datos por la red o almacenarlos."}},
+    {"@type":"Question","name":"¿Mis datos son privados?","acceptedAnswer":{"@type":"Answer","text":"Sí, 100% privados. Todo el procesamiento ocurre en tu navegador (client-side). Ningún dato se envía a ningún servidor."}},
+    {"@type":"Question","name":"¿Cómo identifico un error de sintaxis?","acceptedAnswer":{"@type":"Answer","text":"La herramienta detecta errores en tiempo real y te muestra un mensaje claro indicando la posición, línea y columna aproximada donde se encuentra el problema para que puedas corregirlo rápidamente."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header role="banner">
+  <nav class="nav" aria-label="Navegación principal">
+    <a href="#" class="logo" aria-label="Inicio JSON Formatter">
+      <span class="logo-mark" aria-hidden="true">{ }</span>
+      <span>JSON Formatter</span>
+      <span class="badge">Gratis • Privado • Rápido</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#editor">Editor</a></li>
+      <li><a href="#que-es-json">¿Qué es JSON?</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ADSENSE HEADER BANNER -->
+<div id="adsense-header-banner" class="ad-slot" aria-label="Publicidad superior">
+  <div class="ad-box">ADSENSE HEADER BANNER — 728x90 / Responsive</div>
+</div>
+
+<main id="main-content">
+  <section class="hero" aria-labelledby="main-title">
+    <h1 id="main-title">Formateador, Validador y <span>Minificador de JSON</span> en Tiempo Real</h1>
+    <p>Valida, embellece y minifica tu JSON al instante. 100% en tu navegador, sin enviar datos a servidores. Rápido, seguro y gratuito para desarrolladores.</p>
+  </section>
+
+  <section id="editor" class="editor-card" aria-labelledby="editor-heading">
+    <h2 id="editor-heading" class="sr-only" style="position:absolute;left:-9999px">Editor JSON</h2>
+    <div class="toolbar" role="toolbar" aria-label="Acciones del editor">
+      <div class="toolbar-group">
+        <label for="indentSelect" style="font-size:.85rem;color:var(--muted);font-weight:600">Sangría:</label>
+        <select id="indentSelect" class="select" aria-label="Seleccionar indentación">
+          <option value="2" selected>2 espacios</option>
+          <option value="4">4 espacios</option>
+        </select>
+        <button type="button" id="btnFormat" class="btn btn-primary" aria-label="Formatear JSON">
+          <span aria-hidden="true">❮❯</span> Formatear / Indentar
+        </button>
+        <button type="button" id="btnMinify" class="btn" aria-label="Minificar JSON">
+          <span aria-hidden="true">⚡</span> Minificar
+        </button>
+      </div>
+      <div class="divider" aria-hidden="true"></div>
+      <div class="toolbar-group">
+        <button type="button" id="btnCopy" class="btn btn-success" aria-label="Copiar al portapapeles">
+          <span aria-hidden="true">⎘</span> Copiar
+        </button>
+        <button type="button" id="btnClear" class="btn btn-danger btn-ghost" aria-label="Limpiar todo">
+          <span aria-hidden="true">✕</span> Limpiar
+        </button>
+      </div>
+      <div class="toolbar-group" style="margin-left:auto">
+        <button type="button" id="btnSample" class="btn btn-ghost" aria-label="Cargar JSON de ejemplo">Cargar ejemplo</button>
+      </div>
+    </div>
+
+    <div class="editor-wrap">
+      <div class="editor-label">
+        <span>Entrada JSON</span>
+        <small>Pega tu JSON aquí — Validación automática</small>
+      </div>
+      <label for="jsonInput" class="sr-only" style="position:absolute;left:-9999px">Área de entrada JSON</label>
+      <textarea id="jsonInput" placeholder='Pega tu JSON aquí. Ej:
+{
+  "nombre": "Ana",
+  "edad": 28,
+  "skills": ["JS", "SEO", "A11y"]
+}' spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" aria-describedby="validationStatus errorBox"></textarea>
+      <div id="errorBox" class="error-box" role="alert" aria-live="polite"></div>
+      <div class="status-bar">
+        <div class="counters" aria-live="polite">
+          <span>Caracteres: <strong id="charCount">0</strong></span>
+          <span>Palabras: <strong id="wordCount">0</strong></span>
+          <span>Líneas: <strong id="lineCount">0</strong></span>
+          <span>Tamaño: <strong id="sizeCount">0 B</strong></span>
+        </div>
+        <div id="validationStatus" class="validation neutral" role="status" aria-live="polite">
+          <span class="dot" aria-hidden="true"></span>
+          <span id="validationText">Esperando entrada...</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content" aria-labelledby="seo-heading">
+    <article id="que-es-json" class="card">
+      <h2 id="seo-heading">¿Qué es JSON y por qué necesitas formatearlo?</h2>
+      <p><strong>JSON (JavaScript Object Notation)</strong> es el formato estándar para el intercambio de datos en la web moderna. Ligero, legible y compatible con prácticamente todos los lenguajes de programación, JSON es la base de las APIs REST, configuraciones y el almacenamiento NoSQL.</p>
+      <p>Aunque es fácil de escribir, un solo error de sintaxis —una coma extra, una comilla simple en lugar de doble o una llave sin cerrar— puede romper toda tu aplicación. Por eso <strong>validar y formatear JSON</strong> es esencial para cualquier desarrollador frontend, backend o especialista en SEO técnico.</p>
+      
+      <div class="features">
+        <div class="feature">
+          <h4>📖 Legibilidad</h4>
+          <p>Formatear con indentación convierte un bloque ilegible en una estructura jerárquica clara, ideal para depurar APIs.</p>
+        </div>
+        <div class="feature">
+          <h4>🛡️ Validación precisa</h4>
+          <p>Detecta errores al instante con mensajes que indican línea y columna exactas, ahorrando horas de debugging.</p>
+        </div>
+        <div class="feature">
+          <h4>🚀 Rendimiento</h4>
+          <p>Minificar reduce el peso hasta un 40%, optimizando tiempos de carga y consumo de ancho de banda en producción.</p>
+        </div>
+      </div>
+
+      <h3>¿Cómo usar esta herramienta?</h3>
+      <ul>
+        <li><strong>Pega</strong> tu código JSON en el editor superior.</li>
+        <li>El validador te indicará en tiempo real si el JSON es <strong>válido</strong> o <strong>inválido</strong>.</li>
+        <li>Usa <strong>Formatear</strong> para embellecerlo (elige entre 2 o 4 espacios) o <strong>Minificar</strong> para comprimirlo.</li>
+        <li><strong>Copia</strong> el resultado con un clic y úsalo donde lo necesites. Todo 100% privado.</li>
+      </ul>
+    </article>
+
+    <section id="faq" class="card" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Preguntas Frecuentes (FAQ)</h2>
+      <div class="faq">
+        <details>
+          <summary>¿Qué es JSON y para qué sirve?</summary>
+          <p>JSON es un formato ligero de intercambio de datos, fácil de leer y escribir para humanos y de parsear para máquinas. Se utiliza principalmente para transmitir datos entre un servidor y una aplicación web o móvil a través de APIs, y para archivos de configuración.</p>
+        </details>
+        <details>
+          <summary>¿Por qué debo formatear o validar mi JSON?</summary>
+          <p>Formatear mejora la legibilidad y facilita encontrar errores lógicos. Validar garantiza que tu JSON cumple la especificación estricta (comillas dobles, sin comas finales, etc.) y evitará fallos en tu aplicación al hacer <code>JSON.parse()</code>.</p>
+        </details>
+        <details>
+          <summary>¿Qué hace la opción Minificar?</summary>
+          <p>Elimina todos los espacios en blanco, saltos de línea e indentación innecesarios. El resultado es un JSON en una sola línea, más ligero y óptimo para producción, aunque menos legible para humanos.</p>
+        </details>
+        <details>
+          <summary>¿Mis datos están seguros? ¿Se envían a un servidor?</summary>
+          <p>No. Esta herramienta es <strong>100% Client-Side</strong>. Todo el procesamiento se ejecuta con JavaScript en tu propio navegador. Nada de lo que pegas sale de tu dispositivo, garantizando privacidad total.</p>
+        </details>
+        <details>
+          <summary>¿Cómo identifico dónde está el error de sintaxis?</summary>
+          <p>Escribe o pega tu JSON y la herramienta lo analiza en tiempo real. Si hay un error, verás un mensaje en rojo indicando el tipo de error y la posición aproximada (línea y columna) para que puedas corregirlo inmediatamente.</p>
+        </details>
+        <details>
+          <summary>¿Cuál es la diferencia entre 2 y 4 espacios?</summary>
+          <p>Es solo una preferencia de estilo. 2 espacios es el estándar más común en proyectos JavaScript modernos (y ocupa menos), mientras que 4 espacios ofrece una jerarquía visual más marcada. Elige la que use tu equipo.</p>
+        </details>
+      </div>
+    </section>
+  </section>
+</main>
+
+<!-- ADSENSE FOOTER BANNER -->
+<div id="adsense-footer-banner" class="ad-slot" aria-label="Publicidad inferior">
+  <div class="ad-box">ADSENSE FOOTER BANNER — 728x90 / Responsive</div>
+</div>
+
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <p class="copy">© 2026 JSON Formatter Online — Herramienta gratuita para desarrolladores. Hecho con ♥ para la web.</p>
+    <ul class="footer-links" aria-label="Enlaces legales">
+      <li><a href="#" aria-label="Política de Privacidad">Política de Privacidad</a></li>
+      <li><a href="#" aria-label="Términos de Servicio">Términos de Servicio</a></li>
+      <li><a href="#" aria-label="Contacto">Contacto</a></li>
+    </ul>
+  </div>
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const input = $('jsonInput');
+  const indentSelect = $('indentSelect');
+  const btnFormat = $('btnFormat');
+  const btnMinify = $('btnMinify');
+  const btnCopy = $('btnCopy');
+  const btnClear = $('btnClear');
+  const btnSample = $('btnSample');
+  const charCount = $('charCount');
+  const wordCount = $('wordCount');
+  const lineCount = $('lineCount');
+  const sizeCount = $('sizeCount');
+  const validationStatus = $('validationStatus');
+  const validationText = $('validationText');
+  const errorBox = $('errorBox');
+  const toast = $('toast');
+
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(()=> toast.classList.remove('show'), 2200);
+  }
+
+  function formatBytes(bytes){
+    if(bytes < 1024) return bytes + ' B';
+    if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+    return (bytes/1024/1024).toFixed(2) + ' MB';
+  }
+
+  function getLineCol(text, pos){
+    const before = text.slice(0, pos);
+    const lines = before.split('\n');
+    const line = lines.length;
+    const col = lines[lines.length-1].length + 1;
+    return {line, col};
+  }
+
+  function updateCounters(){
+    const text = input.value;
+    const chars = text.length;
+    const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).filter(Boolean).length;
+    const lines = text === '' ? 0 : text.split('\n').length;
+    const bytes = new Blob([text]).size;
+    charCount.textContent = chars.toLocaleString('es-ES');
+    wordCount.textContent = words.toLocaleString('es-ES');
+    lineCount.textContent = lines.toLocaleString('es-ES');
+    sizeCount.textContent = formatBytes(bytes);
+  }
+
+  function setValidation(state, message){
+    validationStatus.className = 'validation ' + state;
+    validationText.textContent = message;
+  }
+
+  function validateLive(){
+    const text = input.value;
+    updateCounters();
+    if(text.trim() === ''){
+      setValidation('neutral','Esperando entrada...');
+      errorBox.classList.remove('show');
+      errorBox.textContent='';
+      return;
+    }
+    try{
+      JSON.parse(text);
+      setValidation('valid','✓ JSON válido');
+      errorBox.classList.remove('show');
+      errorBox.textContent='';
+    }catch(e){
+      let msg = e.message || 'Error de sintaxis';
+      let posMatch = msg.match(/position\s+(\d+)/i);
+      let detail = msg;
+      if(posMatch){
+        const pos = parseInt(posMatch[1],10);
+        const {line,col} = getLineCol(text, pos);
+        const snippet = text.slice(Math.max(0,pos-20), pos+20).replace(/\n/g,'↵');
+        detail = `${msg} — Línea ${line}, columna ${col}\nCerca de: ...${snippet}...`;
+      }else{
+        // Intento para mensajes tipo "Unexpected token ... at ..."
+        // Algunos navegadores no dan posición, intentamos estimar
+        const colMatch = msg.match(/column\s+(\d+)/i);
+        if(colMatch){
+          // no tenemos línea exacta, al menos mostramos mensaje
+        }
+      }
+      setValidation('invalid','✕ JSON inválido');
+      errorBox.textContent = 'Error de sintaxis: ' + detail;
+      errorBox.classList.add('show');
+    }
+  }
+
+  function doFormat(){
+    const text = input.value.trim();
+    if(!text){ showToast('Pega un JSON primero'); input.focus(); return; }
+    const spaces = parseInt(indentSelect.value,10);
+    try{
+      const obj = JSON.parse(text);
+      const formatted = JSON.stringify(obj, null, spaces);
+      input.value = formatted;
+      validateLive();
+      showToast('JSON formateado correctamente ✓');
+    }catch(e){
+      validateLive();
+      let pos = null;
+      const m = e.message.match(/position\s+(\d+)/);
+      if(m) pos = parseInt(m[1],10);
+      let lineInfo = '';
+      if(pos !== null){
+        const {line,col} = getLineCol(text,pos);
+        lineInfo = ` (línea ${line}, columna ${col})`;
+      }
+      showToast('No se pudo formatear: JSON inválido' + lineInfo);
+      // Resaltar error moviendo cursor cerca del error si es posible
+      if(pos !== null){
+        input.focus();
+        input.setSelectionRange(pos, pos+1);
+      }
+    }
+  }
+
+  function doMinify(){
+    const text = input.value.trim();
+    if(!text){ showToast('Pega un JSON primero'); return; }
+    try{
+      const obj = JSON.parse(text);
+      input.value = JSON.stringify(obj);
+      validateLive();
+      showToast('JSON minificado ⚡');
+    }catch(e){
+      validateLive();
+      showToast('No se pudo minificar: JSON inválido');
+    }
+  }
+
+  async function doCopy(){
+    const text = input.value;
+    if(!text){ showToast('Nada que copiar'); return; }
+    try{
+      await navigator.clipboard.writeText(text);
+      showToast('Copiado al portapapeles ⎘');
+    }catch{
+      // Fallback
+      input.select();
+      document.execCommand('copy');
+      showToast('Copiado al portapapeles ⎘');
+    }
+  }
+
+  function doClear(){
+    if(input.value === ''){ showToast('El editor ya está vacío'); return; }
+    input.value='';
+    validateLive();
+    input.focus();
+    showToast('Editor limpiado');
+  }
+
+  // Eventos
+  input.addEventListener('input', validateLive);
+  input.addEventListener('paste', ()=> setTimeout(validateLive, 10));
+  // atajos
+  input.addEventListener('keydown', (e)=>{
+    if((e.ctrlKey || e.metaKey) && e.key === 'Enter'){
+      e.preventDefault(); doFormat();
+    }
+    if(e.key === 'Tab'){
+      e.preventDefault();
+      const start = input.selectionStart;
+      const end = input.selectionEnd;
+      const spaces = ' '.repeat(parseInt(indentSelect.value,10));
+      input.value = input.value.substring(0,start) + spaces + input.value.substring(end);
+      input.selectionStart = input.selectionEnd = start + spaces.length;
+      validateLive();
+    }
+  });
+
+  btnFormat.addEventListener('click', doFormat);
+  btnMinify.addEventListener('click', doMinify);
+  btnCopy.addEventListener('click', doCopy);
+  btnClear.addEventListener('click', doClear);
+  btnSample.addEventListener('click', ()=>{
+    const sample = {
+      "proyecto": "JSON Formatter Online",
+      "version": "1.0.0",
+      "caracteristicas": ["validar", "formatear", "minificar", "copiar"],
+      "config": {"indentacion": 2, "tema": "oscuro", "tiempoReal": true},
+      "usuarios": 15420,
+      "gratis": true
+    };
+    input.value = JSON.stringify(sample, null, parseInt(indentSelect.value,10));
+    validateLive();
+    showToast('Ejemplo cargado');
+    input.focus();
+  });
+
+  indentSelect.addEventListener('change', ()=>{
+    // si ya es válido, reformatear automáticamente al cambiar indentación
+    if(input.value.trim() !== ''){
+      try{ JSON.parse(input.value); doFormat(); }catch{}
+    }
+  });
+
+  // Init
+  validateLive();
+})();
+</script>
+</body>
+</html>
